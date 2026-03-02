@@ -4,7 +4,15 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(
-      `https://places.googleapis.com/v1/places/${placeId}?fields=rating,userRatingCount,reviews&key=${apiKey}`
+      `https://places.googleapis.com/v1/places/${placeId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Goog-Api-Key": apiKey,
+          "X-Goog-FieldMask": "rating,userRatingCount,reviews"
+        }
+      }
     );
 
     const data = await response.json();
